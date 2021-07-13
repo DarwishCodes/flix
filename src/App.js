@@ -1,10 +1,11 @@
 import React from "react";
 import "./sass/main.scss";
+import Header from "./Header/Header";
 
 function App() {
   return (
     <div>
-      <h1 className="heading-primary">Hello World!</h1>
+      <Header />
     </div>
   );
 }

@@ -1,0 +1,57 @@
+@import "../sass/abstracts/variables";
+
+.navigation {
+    z-index: 10;
+    background-image: linear-gradient(90deg,$color-primary, $color-primary--dark 100%);
+
+    &__wrap {
+        display: flex;
+    }
+    
+    &__wrap > * {
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+        padding: 2.5rem 0;
+    }
+
+
+    &__logo-box {
+        justify-content: flex-start;
+        margin-right: 3rem;
+    }
+
+    &__logo {
+        font-family: 'Roboto', sans-serif;
+        font-size: 2.6rem;
+        font-weight: 900;
+        color: $color-white;
+    }
+
+    &__nav {
+        justify-content: center;
+    }
+
+    &__nav-search {
+        flex: 1;
+        justify-content: flex-end;
+    }
+
+    &__list {
+        list-style: none;
+        display: flex;
+        align-items: baseline;
+    }
+
+    &__item:not(:last-child) {
+        margin-right: 4rem;
+    }
+
+    &__link {
+        text-decoration: none;
+        font-size: 1.6rem;
+        font-weight: 500;
+        color: $color-white;
+    }
+
+}
