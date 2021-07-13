@@ -1,9 +1,10 @@
 import React from "react";
+import "./sass/main.scss";
 
 function App() {
   return (
     <div>
-      <h1>Hello World!</h1>
+      <h1 className="heading-primary">Hello World!</h1>
     </div>
   );
 }
