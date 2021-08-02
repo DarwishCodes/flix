@@ -12,7 +12,26 @@ class MyCarousel extends React.Component {
       error: null,
       isLoaded: false,
       items: [],
+      isDown: false,
     };
+    // const carousel = document.getElementsByClassName(
+    //   "BrainhubCarousel__track"
+    // )[0];
+  }
+
+  toggleClass() {
+    const carousel = document.getElementsByClassName(
+      "BrainhubCarousel__track"
+    )[0];
+    // carousel.style.transitionDuration = "0ms";
+    this.setState((prevState) => ({ isDown: !prevState.isDown }));
+    // this.carousel.style.transitionDuration = "0ms";
+    if (this.state.isDown == true && window.screen.width < 640) {
+      carousel.style.transitionDuration = "500ms,500ms";
+    } else if (this.state.isDown == false || this.state.isDown == true) {
+      carousel.style.transitionDuration = "0ms";
+    }
+    // console.log(document.getElementsByClassName("BrainhubCarousel__track"));
   }
 
   componentDidMount() {
@@ -49,8 +68,10 @@ class MyCarousel extends React.Component {
       return (
         <div className="row">
           <Carousel
+            className={this.state.isDown ? "btnDown" : "btnUp"}
             plugins={[
               "arrows",
+              // "infinite",
               {
                 resolve: slidesToShowPlugin,
                 options: {
@@ -62,6 +83,8 @@ class MyCarousel extends React.Component {
               640: {
                 plugins: [
                   "arrows",
+                  "clickToChange",
+                  // "infinite",
                   {
                     resolve: slidesToShowPlugin,
                     options: {
@@ -73,23 +96,39 @@ class MyCarousel extends React.Component {
               900: {
                 plugins: [
                   "arrows",
+                  "clickToChange",
+                  // "infinite",
                   {
                     resolve: slidesToShowPlugin,
                     options: {
-                      numberOfSlides: 2,
+                      numberOfSlides: 1,
                     },
                   },
                 ],
               },
             }}
           >
-            {Object.values(items.results).map((item) => (
-              <img
-                key={item.id}
-                alt="sd"
-                src={`https://image.tmdb.org/t/p/w780/${item.backdrop_path}`}
-              />
-            ))}
+            {Object.values(items.results).map((item) =>
+              item.title != null && item.backdrop_path != null ? (
+                <a
+                  onMouseDown={(e) => this.toggleClass(e)}
+                  onMouseUp={(e) => this.toggleClass(e)}
+                  key={item.id}
+                  href="#"
+                  className="mdCarousel__container"
+                >
+                  <div className="mdCarousel__text">
+                    <h2 className="heading-secondry">{item.title}</h2>
+                  </div>
+                  <img
+                    className="carousel-image"
+                    key={item.id}
+                    alt="sd"
+                    src={`https://image.tmdb.org/t/p/w780/${item.backdrop_path}`}
+                  />
+                </a>
+              ) : null
+            )}
           </Carousel>
         </div>
       );
